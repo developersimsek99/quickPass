@@ -1,0 +1,59 @@
+﻿@model quickPassProject.Models.User
+@{
+    ViewBag.Title = "quickPass - Giriş Yap";
+    Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+}
+<div class="container mt-5">
+    <div class="col-md-12 row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel panel-heading text-center"><a href="/Home/Index"><img src="~/Image/IlkLogoKare.png" height="100" width="140" /></a></div>
+                <div class="panel panel-body">
+                    @using (Html.BeginForm("Autherize", "User", FormMethod.Post))
+                    {
+                        @Html.TextBoxFor(a => a.Username, new { @class = "form-control", @placeholder = "Kullanıcı Adınız", @type = "text", @required = "", @title = "Lütfen kullanıcı adı girin." }) <br />
+                        @Html.TextBoxFor(a => a.Password, new { @class = "form-control", @placeholder = "Şifre", @type = "password", @required = "", @title = "Lütfen şifre girin." }) <br />
+
+                        <div class="col-md-12 row">
+                            <div class="col-md-6">
+                                <div class="form-check form-switch text-muted">
+                                    @Html.CheckBoxFor(a => a.RememberMe, new { @class = "form-check-input" }) Beni Hatırla
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-muted">
+                                <label style="margin-left:13px;"><i class="fas fa-sync"></i> <a href="/User/ForgotPassword" style="text-decoration: none; color: #6c757d;">Şifremi Unuttum</a></label>
+                            </div>
+                        </div> <br />
+                        if (ViewBag.LoginErrorMessage != null)
+                        {
+                            <div style="background-color:#fff3cd; height:40px; border-radius:5px;" class="text-center"><label style="color:#664d03; padding-top:7px;">@ViewBag.LoginErrorMessage</label> </div> <br />
+                        }
+                        <br />
+                        
+                        <div class="col-md-12 row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8 text-center" style="margin-left:15px;">
+                                <input type="submit" value="Giriş Yap" class="btn btn-outline-success" />
+                                <input type="reset" value="Vazgeç" class="btn btn-outline-warning" />
+                            </div>
+                            <div class="col-md-2"></div>
+
+
+                        </div>
+                    }
+                    <div class="container text-center">
+                        <br />
+                        <br />
+
+                        <label style="color: #6c757d;" class="text-center">Üye değil misin? Şimdi <b><a style="text-decoration: none; color: #6c757d;" href="/User/Register"><i class="fas fa-user-plus"></i> Üye Ol</a></b>.</label>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

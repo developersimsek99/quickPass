@@ -1,0 +1,36 @@
+﻿@model quickPassProject.Models.ReportUs
+@{
+    if (Session["username"] == null)
+    {
+        if (!Response.IsRequestBeingRedirected)
+        {
+            Response.Redirect("~/User/Login");
+        }
+    }
+    ViewBag.Title = "quickPass - Bize Bildir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container"> <br /> <br />
+    <h4 class="text-center" style="color:#555;">Tüm Öneri ve Şikâyetlerinize Açığız.</h4>
+    <h6 class="text-center" style="color:#888;">Gönderinizi en kısa sürede dikkatle inceleyeceğiz...</h6><br />
+    <div class="col-md-12 row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 text-center">
+
+            @using (Html.BeginForm("reportUs", "Home", FormMethod.Post))
+            {
+                @Html.TextBoxFor(a => a.Name, new { @class = "form-control", @type = "text", @Value = @Session["name"],  @readonly = "readonly", @required = "" }) <br />
+                @Html.TextBoxFor(a => a.Surname, new { @class = "form-control", @type = "text", @Value = @Session["surname"], @readonly = "readonly", @required = "" }) <br />
+                
+                @Html.TextBoxFor(a => a.Email, new { @class = "form-control", @type = "email",  @Value=@Session["email"],@readonly="readonly",@required="" }) <br />
+                @Html.TextAreaFor(a => a.Content, new { @class = "form-control", @type = "text", @placeholder = "Mesajınız...", @title = "Mesajınızı Buraya Yazın.", @required = "" }) <br />
+                @Html.TextBoxFor(a => a.Time, new { @class = "form-control", @type = "hidden", @Value = DateTime.Now, @readonly = "readonly" }) <br />
+                <input type="submit" value="Gönder" class="btn btn-success" />
+                <input type="reset" value="Vazgeç" class="btn btn-danger" />
+            }
+            
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>

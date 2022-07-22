@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "quickPass Kriptolu Şifre Saklama";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section IndexMenu
+{
+    <!-- Header --><nav class="navbar navbar-expand-lg navbar-light" style="margin-top: -25px; background-color: #048212;">
+                       <div class="container-fluid">
+                           <a class="navbar-brand" href="~/Home/Index"><img src="~/Image/IlkLogoKare.png" height="100" width="140" /> <v style="color:lightgrey; font-size:12px; margin-left:-15px;">by</v> <b style="color:lightgrey; font-size:15px;"> M-M Soft</b></a>
+                           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                               <span class="navbar-toggler-icon"></span>
+                           </button>
+                           <div class="collapse navbar-collapse" id="navbarColor03">
+                               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                   <li class="nav-item">
+                                       <a class="nav-link" aria-current="page" href="~/Home/nasilCalisir"><i class="fas fa-cogs"></i> Nasıl Çalışır?</a>
+                                   </li>
+                                   <li class="nav-item">
+                                       <a class="nav-link" href="#"><i class="fas fa-user-lock"></i> Kullanım Tipi</a>
+                                   </li>
+                                   <li class="nav-item">
+                                       <a class="nav-link" href="#"><i class="fas fa-user-secret"></i> Biz Kimiz</a>
+                                   </li>
+
+                               </ul>
+                           </div>
+                           <form class="d-flex">
+                               <input class="form-control me-2" type="search" placeholder="Sayfada Ara" aria-label="Search">
+                               <button class="btn btn-outline-success" type="submit"><i class="fas fa-search" style="color:white;"></i></button>
+                           </form>
+                           <div class="collapse navbar-collapse" id="navbarColor03" style="margin-left:250px;">
+
+                               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                   @if (Session["name"] == null)
+                                   {
+                                       <li class="nav-item">
+                                           <a class="nav-link" href="/User/Register"><i class="fas fa-user-plus"></i> Üye Ol</a>
+                                       </li>
+
+                                       <li class="nav-item">
+                                           <a class="nav-link" href="/User/Login"><i class="fas fa-sign-in-alt"></i> Giriş Yap</a>
+                                       </li>
+                                   }
+                                   else
+                                   {
+                                       <div class="btn-group" >
+                                           <button type="button" class="btn btn-outline-success" style="color:white;"><i class="fas fa-user"></i> @Session["name"] @Session["surname"]</button>
+                                           <button style="color:white;" type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                               <span class="visually-hidden">Toggle Dropdown</span>
+                                           </button>
+                                           <ul class="dropdown-menu">
+                                               <li><a class="dropdown-item" href="#"><i class="fas fa-info"></i> Bilgilerim</a></li>
+                                               <li><a class="dropdown-item" href="#"><i class="fas fa-user-cog"></i> Ayarlar</a></li>
+                                               @{
+
+                                                   if (Session["isadmin"] == null)
+                                                   {
+                                                       <li><a class="dropdown-item" href="#"><i class="fas fa-database"></i> Depom</a></li>
+                                                   }
+                                                   else
+                                                   {
+                                                       <li><a class="dropdown-item" href="/Admin/messageList"><i class="fas fa-paper-plane"></i> Öneri/Şikâyet</a></li>
+                                                   }
+                                               }
+                                               <li><hr class="dropdown-divider"></li>
+                                               <li><a class="dropdown-item" href="/User/LogOut"><i class="fas fa-power-off"></i> Çıkış Yap</a></li>
+                                           </ul>
+                                       </div>
+                                   }
+
+                                   <!-- Example split danger button -->
+
+
+                               </ul>
+                           </div>
+                           
+                       </div>
+    </nav>
+}
+
+<img src="~/Image/carousel.png" width="100%" />
+<br />
+<br />
+<br />
+<div class="container">
+    <div class="col-md-12 row">
+        <div class="col-md-4">
+            <h5><i class="fas fa-user"></i> Kişisel Şifre Saklama</h5>
+            <label style="color:#555">Kişisel telefon, bilgisayar, mail, sosyal medya vb. şifrelerinizi unutmadan güvende tutun.</label>
+            <hr />
+        </div>
+
+        <div class="col-md-4">
+            <h5><i class="fas fa-users"></i> Kurumsal Şifre Saklama</h5>
+            <label style="color:#555">Şirketinizin veya çalışanlarınızın şifrelerini unutmadan güvende tutun.</label>
+            <hr />
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <h5><i class="fas fa-question-circle"></i> Sitemiz Eksik Mi ?</h5>
+            <label style="color:#555;">Önerilerinizi veya şikâyetlerinizi bize <b><a href="/Home/reportUs" style="text-decoration:none; color:#888;">bildirin</a></b></label>
+            <hr />
+        </div>
+    </div>
+    <br />
+    <br /><br />
+    <div class="col-md-12 row">
+        <div class="col-md-2"></div>
+        <div class="col-md-1"><img src="~/Image/parmakizi.png" width="100" height="80" /></div>
+        <div class="col-md-7" style="margin-left:40px;">
+            <h4 style="color:#888; margin-left:160px;">Bize <b>Güvenin.</b></h4> <br />
+            <label style="color:#555;">Şifrelerinizi kriptolu olarak sistemimizde tutucağımızı bildirmek isteriz.</label>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>

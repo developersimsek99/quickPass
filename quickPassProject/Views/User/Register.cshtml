@@ -1,0 +1,55 @@
+﻿@model quickPassProject.Models.User
+@{
+    ViewBag.Title = "quickPass - Üye Ol";
+    Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+}
+<div class="container mt-5">
+    <div class="col-md-12 row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel panel-heading text-center"><a href="/Home/Index"><img src="~/Image/IlkLogoKare.png" height="100" width="140" /></a></div>
+                <div class="panel panel-body">
+                    @using (Html.BeginForm("Register", "User", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.TextBoxFor(a => a.Name, new { @class = "form-control", @placeholder = "Adınız", @type = "text", @required = "", @title = "Lütfen adınızı girin." }) <br />
+                        @Html.TextBoxFor(a => a.Surname, new { @class = "form-control", @placeholder = "Soyadınız", @type = "text", @required = "", @title = "Lütfen soyadınızı girin." }) <br />
+                        @Html.TextBoxFor(a => a.Username, new { @class = "form-control", @placeholder = "Kullanıcı Adınız", @type = "text", @required = "", @title = "Lütfen kullanıcı adı girin." }) <br />
+                        @Html.TextBoxFor(a => a.Password, new { @class = "form-control", @placeholder = "Şifre", @type = "password", @required = "", @title = "Lütfen şifre girin." }) <br />
+                        @Html.TextBoxFor(a => a.ConfirmPassword, new { @class = "form-control", @placeholder = "Şifre (Tekrar)", @type = "password", @required = "", @title = "Lütfen şifre (tekrar) girin." }) <br />
+                        @Html.TextBoxFor(a => a.Email, new { @class = "form-control", @placeholder = "Email", @type = "email", @required = "", @title = "Lütfen email girin." }) <br />
+                        if (ViewBag.PasswordControl != null)
+                        {
+                            <div style="background-color:#fff3cd; height:40px; border-radius:5px;" class="text-center"><label style="color:#664d03; padding-top:7px;">@ViewBag.PasswordControl</label> </div> <br />
+                        }
+                        @Html.CheckBoxFor(a => a.SecurityAndUse, new { @class = "form-check-input", @type = "checkbox", @required = "" }) <label style="color:#888; font-size:13px;"><a href="#" style="text-decoration:none; color:#888;"><b>Gizlilik</b></a> ve <a href="#" style="text-decoration:none; color:#888;"><b>Kullanım Koşulları</b></a>nı kabul ediyorum.</label> <br />
+
+                        @Html.CheckBoxFor(a => a.UpdateAndAdv, new { @class = "form-check-input", @type = "checkbox" }) <label style="color:#888; font-size:11px;">Email adresime <i class="fas fa-key"></i> quick<b>pass</b> ile ilgili güncelleme ve tanıtımlarla <br /> ilgili e-posta gönderilmesini onaylıyorum.</label> <br />
+                        <br /> <br />
+                        <div class="col-md-12 row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8 text-center" style="margin-left:15px;">
+                                <input type="submit" value="Üye Ol" class="btn btn-outline-success" />
+                                <a class="btn btn-outline-warning" href="~/Home/Index">Vazgeç</a>
+                            </div>
+                            <div class="col-md-2"></div>
+
+
+                        </div>
+                    }
+                    <div class="container text-center">
+                        <br />
+                        <br />
+
+                        <label style="color: #6c757d;" class="text-center">Zaten kayıtlı mısın? <b><a style="text-decoration: none; color: #6c757d;" href="/User/Login"><i class="fas fa-sign-in-alt"></i> Giriş yap</a></b>.</label>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

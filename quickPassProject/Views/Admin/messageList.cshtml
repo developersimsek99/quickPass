@@ -1,0 +1,78 @@
+﻿@model IEnumerable<quickPassProject.Models.ReportUs>
+@{
+    if (Session["isadmin"] == null)
+    {
+        Response.Redirect("/Home/Page404");
+    }
+    ViewBag.Title = "quickPass - Öneri/Şikâyet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="col-md-12 row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <img src="~/Image/new.png" width="40" height="40" style="margin-top:10px;" />
+            @using (Html.BeginForm("","",FormMethod.Post ))
+            {
+                foreach (var item in Model)
+                {
+
+
+                    <div class="card">
+                        <div class="card-header">
+                            @item.Name @item.Surname
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p>@item.Content</p> <br />
+                                <footer class="blockquote-footer" style="font-size:15px;">
+                                    <i class="fas fa-envelope-alt"></i> <cite title="Source Title"><label>@item.Email</label> </cite> tarafından <cite title="Source Title"><i class="far fa-clock"></i> <b>@item.Time</b></cite> tarihinde gönderildi. <br /> <br />
+                                    <div class="col-md-12 row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4">
+                                            <a style="margin-left:180px;" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.id"><i class="fas fa-info-circle"></i></a>
+                                            <div class="modal fade" id="exampleModal-@item.id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Yönetici Dönüş Bilgilendirmeleri</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="text-center">
+                                                                <i class="fas fa-user-tie"></i> @Session["name"] @Session["surname"]
+                                                            </div><br /><br />
+                                                            <i class="fas fa-user"></i> @item.Name @item.Surname adlı kullanıcı için;
+                                                            <br /><br />
+                                                            <input type="hidden" value="@item.Email" />
+                                                            <br /><br />
+                                                            <a class="btn btn-warning" style="color:white;" href="/Admin/Delete/@item.id"><i class="fas fa-trash"></i></a> Kaydı Sil <br /><br />
+                                                            
+                                                            <a class="btn btn-danger" href="/Admin/messageList/@item.Email"><i class="fas fa-thumbs-down"></i></a> Kullanıcıya Olumsuz Dönüş <br /><br />
+                                                            <a class="btn btn-success" href="/Admin/messageList/@item.Email"><i class="fas fa-thumbs-up"></i></a> Kullanıcıya Olumlu Dönüş <br /><br />
+                                                            <i>*Dönüşler kullanıcının sistemde kayıtlı mail adresine yapılacaktır.</i>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anladım!</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div> <br />
+                }
+            }
+
+
+
+        </div>
+            <div class="col-md-2"></div>
+        </div>
+
+    </div>
+
